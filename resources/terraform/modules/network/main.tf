@@ -1,8 +1,32 @@
+# Configure the Microsoft Azure Provider
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>2.0"
+    }
+  }
+}
+provider "azurerm" {
+  features {}
+}
+
+# Create a resource group if it doesn't exist
+resource "azurerm_resource_group" "myterraformgroup" {
+    name     = "${var.prefix}-node-vm-rg"
+    location = var.region
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+
 # Create virtual network
 resource "azurerm_virtual_network" "myterraformnetwork" {
-    name                = "myVnet"
+    name                = "${var.prefix}-node-vm-vnet"
     address_space       = ["10.0.0.0/16"]
-    location            = "eastus"
+    location            = var.region
     resource_group_name = azurerm_resource_group.myterraformgroup.name
 
     tags = {
@@ -12,7 +36,7 @@ resource "azurerm_virtual_network" "myterraformnetwork" {
 
 # Create subnet
 resource "azurerm_subnet" "myterraformsubnet" {
-    name                 = "mySubnet"
+    name                = "${var.prefix}-node-vm-subnet"
     resource_group_name  = azurerm_resource_group.myterraformgroup.name
     virtual_network_name = azurerm_virtual_network.myterraformnetwork.name
     address_prefixes       = ["10.0.1.0/24"]
@@ -20,8 +44,8 @@ resource "azurerm_subnet" "myterraformsubnet" {
 
 # Create public IPs
 resource "azurerm_public_ip" "myterraformpublicip" {
-    name                         = "myPublicIP"
-    location                     = "eastus"
+    name                = "${var.prefix}-node-vm-public-ip"
+    location            = var.region
     resource_group_name          = azurerm_resource_group.myterraformgroup.name
     allocation_method            = "Dynamic"
 
@@ -32,8 +56,8 @@ resource "azurerm_public_ip" "myterraformpublicip" {
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "myterraformnsg" {
-    name                = "myNetworkSecurityGroup"
-    location            = "eastus"
+    name                = "${var.prefix}-node-vm-public-sg"
+    location            = var.region
     resource_group_name = azurerm_resource_group.myterraformgroup.name
 
     security_rule {
@@ -56,8 +80,8 @@ resource "azurerm_network_security_group" "myterraformnsg" {
 
 # Create network interface
 resource "azurerm_network_interface" "myterraformnic" {
-    name                      = "myNIC"
-    location                  = "eastus"
+    name                = "${var.prefix}-node-vm-public-nic"
+    location                  = var.region
     resource_group_name       = azurerm_resource_group.myterraformgroup.name
 
     ip_configuration {
