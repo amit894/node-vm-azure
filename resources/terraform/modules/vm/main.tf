@@ -16,8 +16,8 @@ provider "azurerm" {
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
     name                  = "myVM"
     location              = "eastus"
-    resource_group_name   = azurerm_resource_group.myterraformgroup.name
-    network_interface_ids = [azurerm_network_interface.myterraformnic.id]
+    resource_group_name   = var.resource_group_name
+    network_interface_ids = var.network_interface_id
     size                  = "Standard_DS1_v2"
 
     os_disk {
@@ -39,11 +39,11 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
     admin_ssh_key {
         username       = "azureuser"
-        public_key     = tls_private_key.example_ssh.public_key_openssh
+        public_key     = var.private_key.public_key_openssh
     }
 
     boot_diagnostics {
-        storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+        storage_account_uri = var.primary_blob_endpoint
     }
 
     tags = {
