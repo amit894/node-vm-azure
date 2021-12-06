@@ -1,3 +1,3 @@
-output "myterraformgroup_name" {
+output "resource_group" {
     value = azurerm_resource_group.myterraformgroup.name
 }

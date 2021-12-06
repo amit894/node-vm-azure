@@ -8,17 +8,15 @@ variable "region" {
   default = "eastus"
 }
 
+variable "resource_group_name" {
+  description = "RG name where VM will be hosted"
+  default = ""
+}
+
 variable "tags" {
   description = "Tags for the resource"
   default = {
     environment_name = "dev"
     owner_email = "amit.894@gmail.com"
   }
-}
-
-variable "resource_group_name" {
-  description = "Resource Group for the resource"
-  default = "testapp-node-vm-rg"
-
-
 }
