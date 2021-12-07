@@ -25,7 +25,7 @@ module "vm" {
   region = local.region
   prefix = var.prefix
   network_interface_id=module.networking.interface_id
-  public_key=module.keys.tls_public_key
+  public_key_path="/Users/amitraj/.ssh/id_rsa.pub"
   resource_group_name=module.storage.resource_group
   primary_blob_endpoint=module.storage.primary_blob_endpoint
   tags = local.tags
