@@ -1,0 +1,4 @@
+- name: azure-node-vm
+  hosts: myserver
+  roles:
+    - role: '../roles/nginx'

@@ -1,0 +1,2 @@
+[myserver]
+40.114.111.218 ansible_user=azure_user ansible_ssh_private_key_file=/Users/amitraj/.ssh/id_rsa
