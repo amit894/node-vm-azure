@@ -1,0 +1,3 @@
+- name: Start App using PM2
+  shell: "pm2 start app.js"
+  become: yes
