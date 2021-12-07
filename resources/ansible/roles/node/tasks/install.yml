@@ -5,3 +5,7 @@
 - name: Install npm Package
   apt: name=npm update_cache=yes state=latest
   become: yes
+
+- name: Install PM2
+  shell: " npm install pm2 -g"
+  become: yes
