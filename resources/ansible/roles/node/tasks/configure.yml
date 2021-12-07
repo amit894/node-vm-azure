@@ -1,0 +1,13 @@
+- name: Create app directory
+  file:
+    path: "/var/app/"
+    state: directory
+    owner: "{{ app_user}}"
+    mode: '0755'
+  become: yes
+
+- name: Copy app  page
+  template:
+    src: "templates/app.js.j2"
+    dest: "/var/app/app.js"
+  become: yes

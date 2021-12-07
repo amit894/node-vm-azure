@@ -1,0 +1,7 @@
+- name: Install node Package
+  apt: name=nodejs update_cache=yes state=latest
+  become: yes
+
+- name: Install npm Package
+  apt: name=npm update_cache=yes state=latest
+  become: yes

@@ -1,17 +1,6 @@
 ---
 # tasks file for node
-- name: add apt key for nodesource
-  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-
-- name: add repo for nodesource
-  apt_repository:
-      repo: 'deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main'
-      update_cache: yes
-
-- name: install nodejs
-  apt: name=nodejs
-
-- name: install NPM
-  shell: npm i
-  args:
-    chdir: /home/ubuntu
+- import_tasks: prereqs.yml
+- import_tasks: install.yml
+- import_tasks: configure.yml
+- import_tasks: service.yml
