@@ -25,7 +25,7 @@ module "vm" {
   region = local.region
   prefix = var.prefix
   network_interface_id=module.networking.interface_id
-  private_key=module.keys.tls_private_key
+  public_key=module.keys.tls_public_key
   resource_group_name=module.networking.resource_group
   primary_blob_endpoint=module.storage.primary_blob_endpoint
   tags = local.tags

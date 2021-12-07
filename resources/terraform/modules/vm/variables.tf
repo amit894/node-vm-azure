@@ -17,8 +17,8 @@ variable "resource_group_name" {
   default = ""
 }
 
-variable "private_key" {
-  description = "Private Key for SSH Access"
+variable "public_key" {
+  description = "Public Key for SSH Access"
   default = ""
 }
 
